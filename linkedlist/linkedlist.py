@@ -40,6 +40,13 @@ class LinkedList:
             temp.next = node
         return self.head
 
+    def middleOfList(self):
+        slow, fast = self.head, self.head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow.data
+
 
 node = ListNode(1)
 list = LinkedList()
@@ -53,3 +60,4 @@ list.push(ListNode(10))
 list.printList()
 list.insertAt(4,ListNode(11))
 list.printList()
+print(list.middleOfList())
