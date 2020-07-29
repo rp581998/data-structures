@@ -40,12 +40,45 @@ class LinkedList:
             temp.next = node
         return self.head
 
+    def deleteNode(self, key):
+        temp = self.head
+        if temp is not None:
+            if temp.data == key:
+                self.head = temp.next
+                temp = None
+                return self.head
+        while temp is not None:
+            if temp.data == key:
+                break
+            prev = temp
+            temp = temp.next
+        if temp == None:
+            return self.head
+        prev.next = temp.next
+        temp = None
+
     def middleOfList(self):
-        slow, fast = self.head, self.head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        return slow.data
+        count = 0
+        temp = self.head
+        while temp:
+            count += 1
+            temp = temp.next
+        i = 0
+        temp = self.head
+        while i < count//2:
+            temp = temp.next
+            i+=1
+        return temp
+
+        """              
+              OR
+        def middleOfList(self):
+            a = []
+        while head:
+            a.append(head)
+            head = head.next
+        return a[len(a)//2]
+        """
 
 
 node = ListNode(1)
@@ -60,4 +93,5 @@ list.push(ListNode(10))
 list.printList()
 list.insertAt(4,ListNode(11))
 list.printList()
-print(list.middleOfList())
+middleNode = list.middleOfList()
+print(middleNode.data)
