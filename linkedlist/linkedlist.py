@@ -78,6 +78,15 @@ class LinkedList:
             a.append(head)
             head = head.next
         return a[len(a)//2]
+
+                OR
+        def middleOfList(self):
+        slow, fast = self.head, self.head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow.data
+        
         """
 
 
