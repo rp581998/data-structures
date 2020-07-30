@@ -40,6 +40,18 @@ class LinkedList:
             temp.next = node
         return self.head
 
+    def reverseLinkedList(self):
+        prev = None
+        current = self.head
+        while current is not None:
+            nextNode = current.next
+            current.next = prev
+            prev = current
+            current = nextNode
+        self.head = prev
+        return self.head
+
+
     def deleteNode(self, key):
         temp = self.head
         if temp is not None:
@@ -97,6 +109,7 @@ list.insertAtEnd(ListNode(2))
 list.insertAtEnd(ListNode(3))
 list.insertAtEnd(ListNode(4))
 list.insertAtEnd(ListNode(5))
+list.insertAtEnd(ListNode(5))
 list.printList()
 list.push(ListNode(10))
 list.printList()
@@ -104,3 +117,5 @@ list.insertAt(4,ListNode(11))
 list.printList()
 middleNode = list.middleOfList()
 print(middleNode.data)
+list.reverseLinkedList()
+list.printList()
