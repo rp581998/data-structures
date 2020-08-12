@@ -5,14 +5,14 @@ class ListNode:
 class LinkedList:
     def __init__(self):
         self.head = None
-    def insertAtEnd(self, node):
+    def insertAtEnd(self, newNode):
         if self.head is None:
-            self.head = node
+            self.head = newNode
         else:
             temp = self.head
             while temp.next:
                 temp = temp.next
-            temp.next = node
+            temp.next = newNode
         return self.head
     
     def printList(self):
@@ -22,23 +22,41 @@ class LinkedList:
                 print(temp.data, end = ' ')
                 temp = temp.next
         print()
-    def push(self, node):
+    def push(self, newNode):
         if self.head is None:
-            self.head = node
+            self.head = newNode
         else:
-            node.next = self.head
-            self.head = node
+            newNode.next = self.head
+            self.head = newNode
         return self.head
-    def insertAt(self, position, node):
-        if self.head:
-            count = 0
-            temp = self.head
-            while count < position - 1:
-                temp = temp.next
-                count +=1
-            node.next = temp.next
-            temp.next = node
-        return self.head
+    def getLength(self):
+        temp = self.head
+        count = 1
+        while temp is not None:
+            temp = temp.next
+            count+=1
+        return count
+    def insertAt(self, position,newNode):
+        len = self.getLength()
+        if position > len or position < 0:
+            print("Position is greater than length of linked list or less")
+        else:
+            if position == 0:
+                self.head = self.push(newNode)
+            else:
+                if position == len:
+                    self.head = self.insertAtEnd(newNode)
+                else:
+                    count = 0
+                    temp = self.head
+                    while count < position - 1:
+                        prev = temp
+                        temp = temp.next
+                        count += 1
+                    newNode.next = temp
+                    prev.next = newNode
+                return self.head
+
 
     def reverseLinkedList(self):
         prev = None
@@ -50,6 +68,27 @@ class LinkedList:
             current = nextNode
         self.head = prev
         return self.head
+
+    def delete_biginning(self):
+        len = self.getLength()
+        if len == 0:
+            print ("List is empty")
+        else:
+            self.head = self.head.next
+            len -= 1
+
+    def deleteLastNode(self):
+        len = self.getLength()
+        if len == 0:
+            print("List is empty")
+        else:
+            current = self.head
+            previous = self.head
+            while current.next is not None:
+                previous = current
+                current = current.next
+            previous.next = None
+            len -= 1 
 
 
     def deleteNode(self, key):
@@ -86,9 +125,9 @@ class LinkedList:
               OR
         def middleOfList(self):
             a = []
-        while head:
-            a.append(head)
-            head = head.next
+        while self.head:
+            a.append(self.head.data)
+            self.head = self.head.next
         return a[len(a)//2]
 
                 OR
@@ -102,9 +141,9 @@ class LinkedList:
         """
 
 
-node = ListNode(1)
+#node = ListNode(1)
 list = LinkedList()
-list.insertAtEnd(node)
+list.insertAtEnd(ListNode(1))
 list.insertAtEnd(ListNode(2))
 list.insertAtEnd(ListNode(3))
 list.insertAtEnd(ListNode(4))
@@ -113,9 +152,15 @@ list.insertAtEnd(ListNode(5))
 list.printList()
 list.push(ListNode(10))
 list.printList()
-list.insertAt(4,ListNode(11))
+list.delete_biginning()
 list.printList()
-middleNode = list.middleOfList()
-print(middleNode.data)
-list.reverseLinkedList()
+list.deleteLastNode()
 list.printList()
+#list.insertAt(4,ListNode(11))
+
+#list.insertAt(-1,ListNode(15))
+#list.printList()
+#middleNode = list.middleOfList()
+#print(middleNode.data)
+#list.reverseLinkedList()
+#list.printList()
