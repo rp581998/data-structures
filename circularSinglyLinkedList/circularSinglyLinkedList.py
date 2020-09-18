@@ -25,6 +25,13 @@ class CircularLinkedList:
             self.last.next = newNode
         return self.last
 
+    def addAfterData(self, data, newNode):
+        if (self.last == None):
+            return None
+        temp = self.last.next
+        while temp:
+            return temp
+
     def printList(self):
         temp = self.last.next
         while temp != self.last:
